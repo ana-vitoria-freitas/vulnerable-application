@@ -16,17 +16,19 @@ fastify.register(require('fastify-static'), {
 fastify.post('/login', async function (request, reply) {
     try {
         const response = await pool.query(`SELECT * FROM accounts WHERE email='${request.body.email}' and password='${request.body.password}' `);
-        if(response.rows.length) {
-            reply.sendFile('home.html')
-        }else{
-            reply.status(401).send({message: 'bad request. Try again!'});
-        }
+        // if(response.rows.length) {
+            //reply.sendFile('home.html')
+            reply.send(response.rows);
+        // }else{
+            // reply.status(401).send({message: 'wrong credentials. Try again!'});
+        // }
     } catch (err) {
         throw new Error(err);
     }
 
 
 })
+
   
 fastify.listen(3000, function (err, address) {
     if (err) {
