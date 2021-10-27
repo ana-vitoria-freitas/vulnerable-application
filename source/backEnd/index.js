@@ -2,6 +2,7 @@ const chalk = require('chalk');
 const fastify = require('fastify')({
     logger: true
 })
+
 const proConfig = require('./dataBase/db');
 const Pool = require("pg").Pool;
 const pool = new Pool(proConfig);
@@ -26,10 +27,10 @@ fastify.post('/login', async function (request, reply) {
         throw new Error(err);
     }
 
-
 })
 
   
+  // Run the server!
 fastify.listen(3000, function (err, address) {
     if (err) {
       fastify.log.error(err)
